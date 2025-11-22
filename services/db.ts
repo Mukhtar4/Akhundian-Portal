@@ -24,6 +24,8 @@ interface AkhundianDB extends DBSchema {
   };
 }
 
+type AkhundianStoreName = 'projects' | 'donations' | 'expenses' | 'volunteers' | 'documents';
+
 const DB_NAME = 'akhundian-internal-db';
 const DB_VERSION = 1;
 
@@ -55,27 +57,27 @@ export const initDB = () => {
 };
 
 export const dbService = {
-  async getAll<K extends keyof AkhundianDB>(storeName: K): Promise<AkhundianDB[K]['value'][]> {
+  async getAll<K extends AkhundianStoreName>(storeName: K): Promise<AkhundianDB[K]['value'][]> {
     const db = await initDB();
     return db.getAll(storeName);
   },
 
-  async add<K extends keyof AkhundianDB>(storeName: K, value: AkhundianDB[K]['value']): Promise<void> {
+  async add<K extends AkhundianStoreName>(storeName: K, value: AkhundianDB[K]['value']): Promise<void> {
     const db = await initDB();
     await db.put(storeName, value);
   },
 
-  async update<K extends keyof AkhundianDB>(storeName: K, value: AkhundianDB[K]['value']): Promise<void> {
+  async update<K extends AkhundianStoreName>(storeName: K, value: AkhundianDB[K]['value']): Promise<void> {
     const db = await initDB();
     await db.put(storeName, value);
   },
 
-  async delete<K extends keyof AkhundianDB>(storeName: K, id: string): Promise<void> {
+  async delete<K extends AkhundianStoreName>(storeName: K, id: string): Promise<void> {
     const db = await initDB();
     await db.delete(storeName, id);
   },
   
-  async clear<K extends keyof AkhundianDB>(storeName: K): Promise<void> {
+  async clear<K extends AkhundianStoreName>(storeName: K): Promise<void> {
       const db = await initDB();
       await db.clear(storeName);
   }
