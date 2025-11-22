@@ -1,0 +1,7 @@
+{
+  "name": "Akhundian Foundation Portal",
+  "description": "A professional web portal for the Akhundian Foundation Pakistan to manage donations, projects, volunteers, and beneficiary reporting.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
